@@ -1,1 +1,128 @@
-local player = game.Players.LocalPlayer local character = player.Character or player.CharacterAdded:Wait() local isScriptActive = false -- Create GUI local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui")) local backgroundFrame = Instance.new("Frame", screenGui) local toggleButton = Instance.new("TextButton", backgroundFrame) local badgeLabel = Instance.new("TextLabel", backgroundFrame) -- Set properties for background frame backgroundFrame.Size = UDim2.new(0, 220, 0, 130) backgroundFrame.Position = UDim2.new(0.6, -110, 0.3, 0) backgroundFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50) backgroundFrame.BorderSizePixel = 0 -- Set properties for toggle button toggleButton.Size = UDim2.new(0, 200, 0, 50) toggleButton.Position = UDim2.new(0.5, -100, 0.5, -25) toggleButton.Text = "Activate" toggleButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0) -- Set properties for badge label badgeLabel.Size = UDim2.new(0, 200, 0, 20) badgeLabel.Position = UDim2.new(0.5, -100, 0.85, -10) badgeLabel.Text = "Script Made By Brunèx and Totallynothimplayz" badgeLabel.TextColor3 = Color3.fromRGB(255, 255, 255) badgeLabel.BackgroundTransparency = 1 badgeLabel.TextScaled = true -- Enable dragging for the background frame local dragging local dragInput local dragStart local startPos local function update(input) local delta = input.Position - dragStart backgroundFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y) end backgroundFrame.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then dragging = true dragStart = input.Position startPos = backgroundFrame.Position input.Changed:Connect(function() if input.UserInputState == Enum.UserInputState.End then dragging = false end end) end end) backgroundFrame.InputChanged:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then dragInput = input end end) game:GetService("UserInputService").InputChanged:Connect(function(input) if input == dragInput and dragging then update(input) end end) -- Function to give a downward fling to the "Torso" part of "SamBoss" while the player is inside it local function flingSamBossTorsoDownward() local samBoss = workspace:FindFirstChild("SamBoss") if samBoss and samBoss:FindFirstChild("Torso") then -- Disable collisions for all parts of the player's character (noclip) for _, part in ipairs(character:GetDescendants()) do if part:IsA("BasePart") then part.CanCollide = false end end -- Teleport the player's torso to the "Torso" part character:SetPrimaryPartCFrame(samBoss.Torso.CFrame) -- Add a BodyGyro to keep the torso oriented properly local bodyGyro = Instance.new("BodyGyro") bodyGyro.MaxTorque = Vector3.new(math.huge, math.huge, math.huge) bodyGyro.CFrame = samBoss.Torso.CFrame bodyGyro.Parent = character.PrimaryPart -- Add a BodyAngularVelocity to make the torso spin rapidly local angularVelocity = Instance.new("BodyAngularVelocity") angularVelocity.AngularVelocity = Vector3.new(0, math.rad(50000), 0) -- Spins 50000 degrees per second for extreme speed angularVelocity.MaxTorque = Vector3.new(0, math.huge, 0) angularVelocity.Parent = character.PrimaryPart -- Function to fling "SamBoss" downward local function flingSamBossDownward() wait(0.5) -- Ensure the player's torso is fully inside before applying force local bodyVelocityFling = Instance.new("BodyVelocity") bodyVelocityFling.Velocity = Vector3.new(0, -10000, 0) -- Apply a strong downward force bodyVelocityFling.MaxForce = Vector3.new(math.huge, math.huge, math.huge) bodyVelocityFling.Parent = samBoss.Torso wait(0.2) bodyVelocityFling:Destroy() end flingSamBossDownward() end end -- Function to activate or deactivate the script local function toggleScript() if isScriptActive then -- Deactivate script isScriptActive = false toggleButton.Text = "Activate" toggleButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0) -- Add any necessary code to stop the fling effect print("Fling desativado.") else -- Activate script isScriptActive = true toggleButton.Text = "Deactivate" toggleButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0) flingSamBossTorsoDownward() end end -- Connect button to toggle function toggleButton.MouseButton1Click:Connect(toggleScript)
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local isScriptActive = false
+
+-- Create GUI
+local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+local backgroundFrame = Instance.new("Frame", screenGui)
+local toggleButton = Instance.new("TextButton", backgroundFrame)
+local badgeLabel = Instance.new("TextLabel", backgroundFrame)
+
+-- Set properties for background frame
+backgroundFrame.Size = UDim2.new(0, 220, 0, 130)
+backgroundFrame.Position = UDim2.new(0.6, -110, 0.3, 0)
+backgroundFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+backgroundFrame.BorderSizePixel = 0
+
+-- Set properties for toggle button
+toggleButton.Size = UDim2.new(0, 200, 0, 50)
+toggleButton.Position = UDim2.new(0.5, -100, 0.5, -25)
+toggleButton.Text = "Activate"
+toggleButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+
+-- Set properties for badge label
+badgeLabel.Size = UDim2.new(0, 200, 0, 20)
+badgeLabel.Position = UDim2.new(0.5, -100, 0.85, -10)
+badgeLabel.Text = "Script Made By Brunèx and Totallynothimplayz"
+badgeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+badgeLabel.BackgroundTransparency = 1
+badgeLabel.TextScaled = true
+
+-- Enable dragging for the background frame
+local dragging
+local dragInput
+local dragStart
+local startPos
+
+local function update(input)
+    local delta = input.Position - dragStart
+    backgroundFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+backgroundFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = backgroundFrame.Position
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+backgroundFrame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
+
+-- Function to give a downward fling to the "Torso" part of "SamBoss" while the player is inside it
+local function flingSamBossTorsoDownward()
+    local samBoss = workspace:FindFirstChild("SamBoss")
+    if samBoss and samBoss:FindFirstChild("Torso") then
+        -- Disable collisions for all parts of the player's character (noclip)
+        for _, part in ipairs(character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.CanCollide = false
+            end
+        end
+
+        -- Teleport the player's torso to the "Torso" part
+        character:SetPrimaryPartCFrame(samBoss.Torso.CFrame)
+
+        -- Add a BodyGyro to keep the torso oriented properly
+        local bodyGyro = Instance.new("BodyGyro")
+        bodyGyro.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+        bodyGyro.CFrame = samBoss.Torso.CFrame
+        bodyGyro.Parent = character.PrimaryPart
+
+        -- Add a BodyAngularVelocity to make the torso spin rapidly
+        local angularVelocity = Instance.new("BodyAngularVelocity")
+        angularVelocity.AngularVelocity = Vector3.new(0, math.rad(50000), 0) -- Spins 50000 degrees per second for extreme speed
+        angularVelocity.MaxTorque = Vector3.new(0, math.huge, 0)
+        angularVelocity.Parent = character.PrimaryPart
+
+        -- Function to fling "SamBoss" downward
+        local function flingSamBossDownward()
+            wait(0.5)  -- Ensure the player's torso is fully inside before applying force
+            local bodyVelocityFling = Instance.new("BodyVelocity")
+            bodyVelocityFling.Velocity = Vector3.new(0, -10000, 0) -- Apply a strong downward force
+            bodyVelocityFling.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+            bodyVelocityFling.Parent = samBoss.Torso
+            wait(0.2)
+            bodyVelocityFling:Destroy()
+        end
+
+        flingSamBossDownward()
+    end
+end
+
+-- Function to activate or deactivate the script
+local function toggleScript()
+    if isScriptActive then
+        -- Deactivate script
+        isScriptActive = false
+        toggleButton.Text = "Activate"
+        toggleButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+        -- Add any necessary code to stop the fling effect
+        print("Fling desativado.")
+    else
+        -- Activate script
+        isScriptActive = true
+        toggleButton.Text = "Deactivate"
+        toggleButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+        flingSamBossTorsoDownward()
+    end
+end
+
+-- Connect button to toggle function
+toggleButton.MouseButton1Click:Connect(toggleScript)
