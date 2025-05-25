@@ -1,0 +1,289 @@
+toclipboard("https://discord.gg/7euCFTSPfz")
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "Nom your friends Veno Hub",
+   Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "loading...",
+   LoadingSubtitle = "by Totallynothimplayz",
+   Theme = "DarkBlue", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   DisableRayfieldPrompts = true,
+   DisableBuildWarnings = true, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
+   ConfigurationSaving = {
+      Enabled = false,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "Big Hub"
+   },
+
+   Discord = {
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+local Main = Window:CreateTab("Main", 4483362458) -- Title, Image
+local Section = Main:CreateSection("Home")
+local Player = Window:CreateTab("Player", 4483362458) -- Title, Image
+local Section = Player:CreateSection("User")
+local Credits = Window:CreateTab("Credits", 4483362458) -- Title, Image
+local Section = Credits:CreateSection("Made By")
+
+Rayfield:Notify({
+   Title = "Script Loaded",
+   Content = "Made By Totallynothimplayz",
+   Duration = 6.5,
+   Image = 4483362458,
+})
+
+local Slider = Player:CreateSlider({
+   Name = "WalkSpeed",
+   Range = {1, 500},
+   Increment = 1,
+   Suffix = "Speed",
+   CurrentValue = 16,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Ve)
+   speed = Ve
+   end,
+})
+
+local Toggle = Player:CreateToggle({
+   Name = "Set Your Speed",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   if Value then
+   _G.Clicker = true
+   while _G.Clicker == true do
+   game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speed
+   wait()
+   end
+   else
+   _G.Clicker = false
+   game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+   end
+   end,
+})
+
+local Slider = Player:CreateSlider({
+   Name = "JumpPower",
+   Range = {50, 5000},
+   Increment = 10,
+   Suffix = "Jump",
+   CurrentValue = 50,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Ves)
+   jump = Ves
+   end,
+})
+
+local Toggle = Player:CreateToggle({
+   Name = "Set Your Jump",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   if Value then
+   _G.Clicker = true
+   while _G.Clicker == true do
+   game.Players.LocalPlayer.Character.Humanoid.JumpPower = jump
+   game.Players.LocalPlayer.Character.Humanoid.UseJumpPower = true
+   wait(0.1)
+   end
+   else
+   _G.Clicker = false
+   game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+   end
+   end,
+})
+
+local Toggle = Main:CreateToggle({
+   Name = "God Mode",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Toggle)
+   if Toggle then
+   game:GetService("Players").LocalPlayer.PlayerScripts.ThisViewer.Parent = game:GetService("Players").LocalPlayer.StarterGear
+   else
+   game:GetService("Players").LocalPlayer.StarterGear.ThisViewer.Parent = game:GetService("Players").LocalPlayer.PlayerScripts
+   end
+   end,
+})
+
+local Button = Main:CreateButton({
+   Name = "Respawn Your Char",
+   Callback = function()
+   game:GetService("ReplicatedStorage").RespawnChar:FireServer()
+   end,
+})
+
+local Toggle = Main:CreateToggle({
+   Name = "Disable Shop Gui",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   if Value then
+   _G.Clicker = true
+   while _G.Clicker == true do
+   game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.Open.Visible = false
+   wait(0.5)
+   end
+   else
+   _G.Clicker = false
+   game:GetService("Players").LocalPlayer.PlayerGui.ShopGui.Open.Visible = true
+   end
+   end,
+})
+
+local Button = Main:CreateButton({
+   Name = "Spam Eat Gui (use the walkspeed in gui to not get stunned of eating or any loop speed)",
+   Callback = function()
+   local ScreenGui = Instance.new("ScreenGui")
+local TextButton = Instance.new("TextButton")
+local NotificationLabel = Instance.new("TextLabel")
+local DeleteButton = Instance.new("TextButton") -- New Delete Button
+
+-- Set properties for the ScreenGui
+ScreenGui.Parent = game.CoreGui -- Use CoreGui for executors
+
+-- Set properties for the TextButton
+TextButton.Size = UDim2.new(0, 100, 0, 30) -- Smaller size
+TextButton.Position = UDim2.new(0.5, -50, 0.5, -15) -- Centered position
+TextButton.Text = "Start Eating"
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Red color
+TextButton.Parent = ScreenGui
+TextButton.Draggable = true -- Make the button draggable
+
+-- Set properties for the NotificationLabel
+NotificationLabel.Size = UDim2.new(0, 300, 0, 50) -- Size of the notification
+NotificationLabel.Position = UDim2.new(0.5, -150, 0.1, 0) -- Position at the top center
+NotificationLabel.Text = "Credits by Totallynothimplayz"
+NotificationLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Black background
+NotificationLabel.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text
+NotificationLabel.TextScaled = true -- Scale text to fit
+NotificationLabel.Visible = false -- Initially hidden
+NotificationLabel.Parent = ScreenGui
+
+-- Set properties for the DeleteButton
+DeleteButton.Size = UDim2.new(0, 100, 0, 30) -- Size of the delete button
+DeleteButton.Position = UDim2.new(1, -110, 0, 10) -- Position at the top right corner
+DeleteButton.Text = "Delete GUI"
+DeleteButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Red color
+DeleteButton.Parent = ScreenGui
+DeleteButton.Draggable = true -- Make the button draggable
+
+-- Variables to control the loop
+local shouldContinue = false
+local loopRunning = false
+
+-- Function to show the notification
+local function showNotification()
+    NotificationLabel.Visible = true
+    wait(5) -- Show the notification for 5 seconds
+    NotificationLabel.Visible = false
+end
+
+-- Function to start the loop
+local function startLoop()
+    if not loopRunning then
+        loopRunning = true
+        TextButton.Text = "Stop Loop"
+        
+        while shouldContinue do
+            wait(0.000000000000) -- Use a reasonable wait time to avoid excessive server calls
+            if game.Players.LocalPlayer and game.Players.LocalPlayer.Character then
+                -- Directly invoke the server without any checks
+                game.Players.LocalPlayer.Character.EatCall:InvokeServer()
+            end
+        end
+        
+        loopRunning = false
+        TextButton.Text = "Start Loop" -- Reset button text when loop stops
+    end
+end
+
+-- Function to toggle the loop
+local function toggleLoop()
+    if shouldContinue then
+        shouldContinue = false
+        TextButton.Text = "Start Loop"
+    else
+        shouldContinue = true
+        startLoop()
+    end
+end
+
+-- Function to delete the GUI
+local function deleteGui()
+    ScreenGui:Destroy() -- Remove the entire ScreenGui
+end
+
+-- Connect button click events
+TextButton.MouseButton1Click:Connect(function()
+    toggleLoop()
+end)
+
+DeleteButton.MouseButton1Click:Connect(function()
+    deleteGui() -- Call the delete function when the delete button is clicked
+end)
+
+-- Show the notification when the script starts
+showNotification()
+   end,
+})
+
+local Button = Main:CreateButton({
+   Name = "kicks u if a dev joins",
+   Callback = function()
+   local userIdsToKick = {
+    4520429111, -- Replace with the actual User ID
+    3851031345,
+    74434421,
+    124811126
+    -- Add more User IDs as needed
+}
+
+-- Get the local player
+local player = game.Players.LocalPlayer
+
+-- Function to check if the local player should be kicked
+local function checkUserIds()
+    while true do
+        wait(5) -- Check every 5 seconds (adjust as needed)
+        
+        for _, otherPlayer in ipairs(game.Players:GetPlayers()) do
+            if otherPlayer.UserId == player.UserId then
+                -- Skip checking the local player against themselves
+                continue
+            end
+            
+            for _, userId in ipairs(userIdsToKick) do
+                if otherPlayer.UserId == userId then
+                    player:Kick("You have been kicked from the game due to a Dev With A Ban Gui Is In Your Server")
+                    return
+                end
+            end
+        end
+    end
+end
+
+-- Start checking user IDs
+checkUserIds()
+   end,
+})
+
+local Paragraph = Credits:CreateParagraph({Title = "Script Owner: Totallynothinplayz", Content = "The Owner Of The Script"})
