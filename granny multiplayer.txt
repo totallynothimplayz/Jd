@@ -1,0 +1,459 @@
+toclipboard("https://discord.gg/7euCFTSPfz")
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "Granny:Multiplayer Veno Hub V0.2.5",
+   Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "loading...",
+   LoadingSubtitle = "by Totallynothimplayz",
+   Theme = "DarkBlue", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   DisableRayfieldPrompts = true,
+   DisableBuildWarnings = true, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
+   ConfigurationSaving = {
+      Enabled = false,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "Big Hub"
+   },
+
+   Discord = {
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+local Main = Window:CreateTab("Main", 4483362458) -- Title, Image
+local Section = Main:CreateSection("Home")
+local Ending = Window:CreateTab("Endings", 4483362458) -- Title, Image
+local Section = Ending:CreateSection("Instantly Win")
+local Troll = Window:CreateTab("Trolling", 4483362458) -- Title, Image
+local Section = Troll:CreateSection("Breaking Game Stuff")
+local Credits = Window:CreateTab("Credits", 4483362458) -- Title, Image
+local Section = Credits:CreateSection("Made By")
+
+Rayfield:Notify({
+   Title = "Script Loaded.",
+   Content = "Made By Totallynothimplayz",
+   Duration = 6.5,
+   Image = 4483362458,
+})
+
+local Button = Main:CreateButton({
+   Name = "God Mode [Fixed]",
+   Callback = function()
+        local a = workspace:GetDescendants()
+for _, objd in ipairs(a) do
+            if objd.Name == "CameraJumpscare2" then
+objd.Parent:FindFirstChild("Jumpscare"):Remove()
+           end
+           end
+   end,
+})
+
+local Button = Troll:CreateButton({
+   Name = "Kill Granny (FE)",
+   Callback = function()
+   local a = workspace:GetDescendants()
+for _, obj in ipairs(a) do
+            if obj.Name == "Granny" and obj:FindFirstChild("Zombie") then
+           local bambam = Instance.new("BodyThrust")
+            bambam.Name = "Flinger"
+            bambam.Parent = obj.HumanoidRootPart
+            bambam.Force = Vector3.new(0,-999,0)
+           end
+           end
+   end,
+})
+
+local Button = Troll:CreateButton({
+   Name = "kill Spider Slendrina Mother (FE)",
+   Callback = function()
+   local a = workspace:GetDescendants()
+for _, obj in ipairs(a) do
+            if obj.Name == "SlendrinaMother" and obj:FindFirstChild("HumanoidRootPart") then
+           local bambam = Instance.new("BodyThrust")
+            bambam.Name = "Flinger"
+            bambam.Parent = obj.HumanoidRootPart
+            bambam.Force = Vector3.new(0,-999,0)
+           end
+           end
+   end,
+})
+
+local Button = Troll:CreateButton({
+   Name = "Temp Kill Granny (FE/must be near)",
+   Callback = function()
+   local a = workspace:GetDescendants()
+   for _, obj in ipairs(a) do
+   if obj.Name == "Granny" and obj:FindFirstChild("HumanoidRootPart") then
+   obj.Zombie.Health = 5
+   obj.Zombie.Health = -1
+   end
+   end
+   end,
+})
+
+local Button = Troll:CreateButton({
+   Name = "Kill Spider (FE/ must be near)",
+   Callback = function()
+   local a = workspace:GetDescendants()
+   for _, obj in ipairs(a) do
+   if obj.Name == "Spider" and obj:FindFirstChild("CrowZombie") then
+   obj.CrowZombie.Health = 5
+   obj.CrowZombie.Health = -1
+   end
+   end
+   end,
+})
+
+local Toggle = Main:CreateToggle({
+   Name = "Esp Monsters",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   if Value then
+   local a = workspace:GetDescendants()
+   for _, obj in ipairs(a) do
+            if obj.Name == "CameraJumpscare2" then
+           local highlight = Instance.new("Highlight")
+        highlight.Adornee = obj.Parent
+        highlight.Name = "CHICKEN"
+        highlight.FillColor = Color3.fromRGB(0, 0, 255)
+        highlight.FillTransparency = 0.5
+        highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+        highlight.OutlineTransparency = 0.5
+        highlight.Parent = obj.Parent
+        
+        local billboardGui = Instance.new("BillboardGui")
+            billboardGui.Size = UDim2.new(0, 100, 0, 50) -- Adjust size as needed
+            billboardGui.AlwaysOnTop = true
+            billboardGui.Adornee = obj.Parent
+            billboardGui.Name = obj.Parent.Name -- Set the name to the parent's name
+            billboardGui.Parent = obj.Parent
+            
+            local frame = Instance.new("Frame", billboardGui)
+            frame.Size = UDim2.new(1, 0, 1, 0)
+            frame.BackgroundTransparency = 1
+            frame.BorderSizePixel = 0
+            
+            local textLabel = Instance.new("TextLabel", frame)
+            textLabel.Text = obj.Parent.Name
+            textLabel.Size = UDim2.new(1, 0, 1, 0)
+            textLabel.BackgroundTransparency = 1
+            textLabel.BorderSizePixel = 0
+            textLabel.TextColor3 = Color3.fromRGB(255, 255, 255) -- Set the text color to white
+            textLabel.TextStrokeTransparency = 0.5 -- Set the transparency of the stroke
+            textLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0) -- Set the stroke color to black for better visibility
+            textLabel.TextSize = 5 -- Set the text size to 5
+           end
+           end
+           else
+           local a = workspace:GetDescendants()
+           for _, obj in ipairs(a) do
+            if obj.Name == "CHICKEN" then
+            obj.Parent:FindFirstChildOfClass("BillboardGui"):Destroy()
+           obj:Remove()
+           end
+           end
+end
+   end,
+})
+
+local Button = Main:CreateButton({
+   Name = "Tools Gui",
+   Callback = function()
+   local PiggyGui = Instance.new("ScreenGui")
+PiggyGui.Name = "PiggyGui"
+PiggyGui.Parent = game.CoreGui
+
+local Frame = Instance.new("Frame", PiggyGui)
+Frame.BackgroundColor3 = Color3.new(0.15, 0.15, 0.15)
+Frame.Position = UDim2.new(0.21, 10, 0.05, 0)
+Frame.Size = UDim2.new(0, 500, 0, 310)
+Frame.Visible = false
+Frame.Draggable = true
+Frame.Active = true
+
+local ScrollingFrame = Instance.new("ScrollingFrame", Frame)
+ScrollingFrame.BackgroundColor3 = Color3.new(0.15, 0.15, 0.15)
+ScrollingFrame.Position = UDim2.new(0.05, 0, 0.1, 0)
+ScrollingFrame.Size = UDim2.new(0, 450, 0, 230)  -- Larger size
+ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+ScrollingFrame.ScrollBarThickness = 8
+ScrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+
+local ToggleButton = Instance.new("TextButton", PiggyGui)
+ToggleButton.Name = "ToggleButton"
+ToggleButton.Size = UDim2.new(0, 50, 0, 50)
+ToggleButton.Position = UDim2.new(0.85, 0,0.133, 0)  -- Center of the screen
+ToggleButton.Text = "Toggle"
+ToggleButton.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+ToggleButton.TextColor3 = Color3.new(1, 1, 1)
+ToggleButton.Active = true
+ToggleButton.BorderSizePixel = 0
+ToggleButton.BackgroundTransparency = 0.5
+ToggleButton.ClipsDescendants = true
+
+-- Make ToggleButton draggable
+local draggingToggle
+local dragInputToggle
+local dragStartToggle
+local startPosToggle
+
+local function updateToggle(input)
+    local delta = input.Position - dragStartToggle
+    ToggleButton.Position = UDim2.new(startPosToggle.X.Scale, startPosToggle.X.Offset + delta.X, startPosToggle.Y.Scale, startPosToggle.Y.Offset + delta.Y)
+end
+
+ToggleButton.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        draggingToggle = true
+        dragStartToggle = input.Position
+        startPosToggle = ToggleButton.Position
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                draggingToggle = false
+            end
+        end)
+    end
+end)
+
+ToggleButton.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInputToggle = input
+    end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if input == dragInputToggle and draggingToggle then
+        updateToggle(input)
+    end
+end)
+
+ToggleButton.MouseButton1Click:Connect(function()
+    Frame.Visible = not Frame.Visible
+    TitleLabel.Visible = Frame.Visible
+end)
+
+local UIGridLayout = Instance.new("UIGridLayout", ScrollingFrame)
+UIGridLayout.CellSize = UDim2.new(0, 90, 0, 75)
+
+-- Update items periodically
+while wait(1) do
+    if ScrollingFrame.Visible then
+        local a = workspace:GetDescendants()
+        local items = {}
+        local itemframes = ScrollingFrame:GetChildren()
+
+        -- Clear existing item frames
+        for _, frame in ipairs(itemframes) do
+            if frame.ClassName == "TextButton" then
+                frame:Destroy()
+            end
+        end
+
+        -- Find items to display
+        for _, obj in ipairs(a) do
+            if obj.Name == "Toolname" and obj.Parent:FindFirstChild("InteractRemote") then
+                table.insert(items, obj.Parent)
+            end
+        end
+
+        -- Create new item frames
+        for _, item in ipairs(items) do
+            local ItemFrame = Instance.new("TextButton", ScrollingFrame)
+            ItemFrame.Name = "ItemFrame"
+            ItemFrame.BackgroundColor3 = Color3.new(1, 1, 1)
+            ItemFrame.BackgroundTransparency = 0.95
+            ItemFrame.Size = UDim2.new(0, 100, 0, 100)
+            ItemFrame.Text = ""
+
+            local View = Instance.new("ViewportFrame", ItemFrame)
+            View.Name = "View"
+            View.Size = UDim2.new(1.2, 0, 1.2, 0)
+            View.BackgroundTransparency = 1
+            View.BorderSizePixel = 0
+
+            local viewportclone = item:Clone()
+            viewportclone.Parent = View
+
+            local cam = Instance.new("Camera", View)
+            cam.CameraType = Enum.CameraType.Fixed
+            local objectPosition = item.Position
+            local cameraPosition = objectPosition + Vector3.new(0, 3, 0)
+            cam.CFrame = CFrame.new(cameraPosition, objectPosition)
+            View.CurrentCamera = cam
+
+            ItemFrame.MouseButton1Down:Connect(function()
+    local player = game.Players.LocalPlayer
+    local character = player.Character
+    if character and character:FindFirstChild("HumanoidRootPart") then
+    if item:FindFirstChild("InteractRemote") then
+        end
+    end
+local a = item:GetDescendants()
+           for _, objd in ipairs(a) do
+            if objd.Name == "InteractRemote" then
+            objr = objd
+           end
+           end
+                            local args = {
+                                [1] = game:GetService("Players").LocalPlayer
+                            }
+                            objr:FireServer(unpack(args))
+            end)
+        end
+    end
+end
+   end,
+})
+
+local Button = Troll:CreateButton({
+   Name = "Kill Grandpa (FE)",
+   Callback = function()
+   local a = workspace:GetDescendants()
+for _, obj in ipairs(a) do
+            if obj.Name == "Grandpa" and obj:FindFirstChild("HumanoidRootPart") then
+           local bambam = Instance.new("BodyThrust")
+            bambam.Name = "Flinger"
+            bambam.Parent = obj.HumanoidRootPart
+            bambam.Force = Vector3.new(0,-999,0)
+           end
+           end
+   end,
+})
+
+local Button = Troll:CreateButton({
+   Name = "Temp Kill Grandpa (FE/Must be near)",
+   Callback = function()
+   local a = workspace:GetDescendants()
+   for _, obj in ipairs(a) do
+   if obj.Name == "Grandpa" and obj:FindFirstChild("CameraJumpscare1") or obj:FindFirstChild("CameraJumpscare")  then
+   obj.Zombie.Health = 5
+   obj.Zombie.Health = -1
+   end
+   end
+   end,
+})
+
+local Paragraph = Credits:CreateParagraph({Title = "Script Owner: Totallynothinplayz", Content = "The Owner Of The Script"})
+
+local Button = Main:CreateButton({
+   Name = "throw infinite bombs Gui (FE/OP/Chapter 2)",
+   Callback = function()
+   -- Create ScreenGui if it doesn't exist
+local playerGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+local screenGui = playerGui:FindFirstChild("CoolButtonGui") or Instance.new("ScreenGui")
+screenGui.Name = "CoolButtonGui"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = playerGui
+
+-- Create the button
+local button = Instance.new("TextButton")
+button.Name = "CoolButton"
+button.Text = "Throw Grenade"
+button.Size = UDim2.new(0, 150, 0, 50) -- Made larger for easier clicking
+button.Position = UDim2.new(0.5, 0, 0.5, 0) -- Simpler centered position
+button.AnchorPoint = Vector2.new(0.5, 0.5) -- Proper centering
+button.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+button.Font = Enum.Font.GothamBold
+button.TextSize = 18
+button.AutoButtonColor = false
+button.Active = true
+button.Draggable = true
+button.Parent = screenGui
+
+-- Visual elements
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 8)
+corner.Parent = button
+
+local shadow = Instance.new("UIStroke")
+shadow.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+shadow.Color = Color3.fromRGB(0, 100, 180)
+shadow.Thickness = 3
+shadow.Transparency = 0.7
+shadow.Parent = button
+
+-- Basic hover effect
+button.MouseEnter:Connect(function()
+    button.BackgroundColor3 = Color3.fromRGB(0, 200, 255)
+end)
+
+button.MouseLeave:Connect(function()
+    button.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+end)
+
+button.MouseButton1Click:Connect(function()
+    local args = {
+    [1] = game:GetService("Players").LocalPlayer
+}
+
+game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.ScreenGUI.HandGrenadeGUI.EnemyDamage:FireServer(unpack(args))
+end)
+   end,
+})
+
+local Button = Ending:CreateButton({
+   Name = "Escape By Door (Normal Ending)",
+   Callback = function()
+   local a = workspace:GetDescendants()
+for _, obj in ipairs(a) do
+            if obj.Name == "Ending1" and obj:FindFirstChild("TouchInterest") then
+           firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, obj ,0)
+           end
+           end
+   end,
+})
+
+local Button = Ending:CreateButton({
+   Name = "Escape By Door (Teddy Ending)",
+   Callback = function()
+   local a = workspace:GetDescendants()
+for _, obj in ipairs(a) do
+            if obj.Name == "Ending2" and obj:FindFirstChild("TouchInterest") then
+           firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, obj ,0)
+           end
+           end
+   end,
+})
+
+local Button = Ending:CreateButton({
+   Name = "Escape By Car Ending",
+   Callback = function()
+   local a = workspace:GetDescendants()
+for _, obj in ipairs(a) do
+            if obj.Name == "Ending3" and obj:FindFirstChild("TouchInterest") then
+           firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, obj ,0)
+           end
+           end
+   end,
+})
+
+local Button = Ending:CreateButton({
+   Name = "Escape By Sewers Ending",
+   Callback = function()
+   local a = workspace:GetDescendants()
+for _, obj in ipairs(a) do
+            if obj.Name == "Ending4" and obj:FindFirstChild("TouchInterest") then
+           firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, obj ,0)
+           end
+           end
+   end,
+})
