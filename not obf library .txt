@@ -2195,10 +2195,7 @@ local function Unhide(Window, currentTab)
 
 end
 
-local MainSize
-local MinSize 
-	MainSize = UDim2.fromOffset(650, 420)
-	MinSize = UDim2.fromOffset(Camera.ViewportSize.X - 275, 42)
+
 
 local function Maximise(Window)
 	Window.Controls.ToggleSize.ImageLabel.Image = "rbxassetid://10137941941"
@@ -2221,6 +2218,7 @@ function Luna:CreateWindow(WindowSettings)
 		Name = "Luna UI Example Window",
 		Subtitle = "",
 		LogoID = "6031097225",
+		Size = UDim2.new(0.95, 0, 0.8, 0), -- Change This To Whatever Size You Want
 		LoadingEnabled = true,
 		LoadingTitle = "Luna Interface Suite",
 		LoadingSubtitle = "by Nebula Softworks",
@@ -2256,12 +2254,17 @@ function Luna:CreateWindow(WindowSettings)
 
 	local Window = { Bind = Enum.KeyCode.K, CurrentTab = nil, State = true, Size = false, Settings = nil }
 
+local MainSize
+local MinSize 
+	MainSize = WindowSettings.Size
+	MinSize = UDim2.fromOffset(Camera.ViewportSize.X - 275, 42)
+
 	Main.Title.Title.Text = WindowSettings.Name
 	Main.Title.subtitle.Text = WindowSettings.Subtitle
 	Main.Logo.Image = "rbxassetid://" .. WindowSettings.LogoID
 	Main.Visible = true
 	Main.BackgroundTransparency = 1
-	Main.Size = MainSize
+	Main.Size = WindowSettings.Size
 	Main.Size = UDim2.fromOffset(Main.Size.X.Offset - 70, Main.Size.Y.Offset - 55)
 	Main.Parent.ShadowHolder.Size = Main.Size
 	LoadingFrame.Frame.Frame.Title.TextTransparency = 1
