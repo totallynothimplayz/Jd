@@ -2197,7 +2197,7 @@ end
 
 local MainSize
 local MinSize 
-	MainSize = UDim2.fromOffset(600, 300)
+	MainSize = UDim2.fromOffset(650, 450)
 	MinSize = UDim2.fromOffset(Camera.ViewportSize.X - 275, 42)
 
 local function Maximise(Window)
