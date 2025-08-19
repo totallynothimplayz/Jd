@@ -1648,7 +1648,7 @@ local function BlurModule(Frame)
 
 	local frame = Instance.new('Frame')
 	frame.Parent = Frame
-	frame.Size = UDim2.new(0.95, 0, 0.6, 0)
+	frame.Size = UDim2.new(0.95, 0, 0.95, 0)
 	frame.Position = UDim2.new(0.5, 0, 0.5, 0)
 	frame.AnchorPoint = Vector2.new(0.5, 0.5)
 	frame.BackgroundTransparency = 1
@@ -2162,7 +2162,7 @@ function Luna:Notification(data) -- action e.g open messages
 end
 
 local function Unhide(Window, currentTab)
-	Window.Size = UDim2.new(0, 0.7, 0, 0.6)
+	Window.Size = SizeBleh
 	Window.Elements.Visible = true
 	Window.Visible = true
 	task.wait()
@@ -2197,7 +2197,7 @@ end
 
 local MainSize
 local MinSize 
-	MainSize = UDim2.new(0, 500, 0, 300)
+	MainSize = UDim2.fromOffset(500, 400)
 	MinSize = UDim2.fromOffset(Camera.ViewportSize.X - 275, 42)
 
 local function Maximise(Window)
