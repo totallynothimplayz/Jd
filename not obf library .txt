@@ -2162,7 +2162,7 @@ function Luna:Notification(data) -- action e.g open messages
 end
 
 local function Unhide(Window, currentTab)
-	Window.Size = UDim2.new(0.95, 0, 0.6, 0)
+	Window.Size = UDim2.new(0, 0.7, 0, 0.6)
 	Window.Elements.Visible = true
 	Window.Visible = true
 	task.wait()
