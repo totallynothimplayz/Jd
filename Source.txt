@@ -1592,7 +1592,7 @@ function Luna:CreateWindow(WindowSettings)
 local MainSize
 local MinSize 
 	MainSize = WindowSettings.Size
-	MinSize = UDim2.new(0, 0, 0, 0)
+	MinSize = UDim2.new(MainSize.X.Scale, MainSize.X.Offset, 0, 30)
 
 	Main.Title.Title.Text = WindowSettings.Name
 	Main.Title.subtitle.Text = WindowSettings.Subtitle
