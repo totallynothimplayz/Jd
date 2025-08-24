@@ -1530,7 +1530,8 @@ local function Unhide(Window, currentTab)
 
 end
 
-
+local MinSize 
+	MinSize = UDim2.fromOffset(Camera.ViewportSize.X - 275, 42)
 
 local function Maximise(Window)
 	Window.Controls.ToggleSize.ImageLabel.Image = "rbxassetid://10137941941"
@@ -1590,9 +1591,7 @@ function Luna:CreateWindow(WindowSettings)
 	local Window = { Bind = Enum.KeyCode.K, CurrentTab = nil, State = true, Size = false, Settings = nil }
 
 local MainSize
-local MinSize 
 	MainSize = WindowSettings.Size
-	MinSize = UDim2.new(MainSize.X.Scale, MainSize.X.Offset, 0, 30)
 
 	Main.Title.Title.Text = WindowSettings.Name
 	Main.Title.subtitle.Text = WindowSettings.Subtitle
