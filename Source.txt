@@ -1594,10 +1594,10 @@ function Luna:CreateWindow(WindowSettings)
 
 local MinSize 
 MinSize = UDim2.new(
-    WindowSettings.Size.X.Scale,  
-    100,  
-    0,    
-    42    
+    WindowSettings.Size.X.Scale,    
+    WindowSettings.Size.X.Offset,   
+    0,                              
+    42                              
 )
 local MainSize
 	MainSize = WindowSettings.Size
