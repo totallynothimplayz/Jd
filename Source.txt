@@ -1617,6 +1617,11 @@ end)
 				end
 			end)
 
+function CloseLibrary()
+Luna:Remove()
+LunaUI:Remove()
+end
+
 			KeySystem.Close.MouseButton1Click:Connect(function()
 				
 				Luna:Destroy()
@@ -1733,11 +1738,6 @@ end)
 				break
 			end
 		end
-
-function CloseLibrary()
-Luna:Remove()
-LunaUI:Remove()
-end
 
 		-- Stolen From Sirius Stuff Begins Here
 
