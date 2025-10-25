@@ -1734,6 +1734,11 @@ end)
 			end
 		end
 
+local function CloseLibrary()
+Luna:Remove()
+LunaUI:Remove()
+end
+
 		-- Stolen From Sirius Stuff Begins Here
 
 		HomeTabPage.detailsholder.dashboard.Discord.Interact.MouseButton1Click:Connect(function()
