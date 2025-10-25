@@ -1734,7 +1734,7 @@ end)
 			end
 		end
 
-local function CloseLibrary()
+function CloseLibrary()
 Luna:Remove()
 LunaUI:Remove()
 end
